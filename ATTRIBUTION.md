@@ -10,7 +10,7 @@ submission requirements.
 This project was developed with the assistance of Claude. Pseudo-code and outlines were coded by hand by the project author, and Claude was used for complete syntax, as well as extensive debugging. Claude was also used towards the end of the project for substantial clean-up of code, removing unnecessary functions from failed trials of other ideas. Consider the following an exhaustive list of components that were wholly or substantially produced or revised with AI assistance (attribution generated using Claude based on previous chatlogs of requests).
 
 **Model architecture (`LongformerTripleClassifier`)**
-- Project author originally implemented a DeBERTa-v3-base model. Claude contributed a replacement of DeBERTa-v3-base (512 token limit) with `allenai/longformer-base-4096` to encode OP + both arguments in a single forward pass without truncation.
+- Project author originally implemented a DeBERTa-v3-base model. Claude contributed a replacement of DeBERTa-v3-base with `allenai/longformer-base-4096` to encode OP + both arguments in a single forward pass without truncation and to reduce the need for aggressive token removal.
 - Implementation of `global_attention_mask` with position 0 set to 1 (CLS token global attention), required for Longformer classification tasks.
 - Mean pooling over non-padding tokens, replacing CLS token extraction.
 - Switch from separate per-argument encoding to triple encoding `[OP | ARG_A | ARG_B]` in a single sequence to eliminate length-as-feature leakage, where the model was learning to use padding length as a proxy for argument length rather than reading content.
@@ -52,7 +52,7 @@ Preliminary versions of ATTRIBUTION.md and README.md were generated using Claude
 | Library | Version | Purpose | License |
 |---|---|---|---|
 | PyTorch (`torch`) | ≥2.0 | Model training, tensor operations, DataLoader | BSD-3-Clause |
-| Hugging Face Transformers (`transformers`) | ≥4.35 | DeBERTa-v3 model, tokenizer, schedules | Apache 2.0 |
+| Hugging Face Transformers (`transformers`) | ≥4.35 | Longformer model, tokenizer, schedules | Apache 2.0 |
 | Hugging Face Accelerate (`accelerate`) | ≥0.24 | Mixed-precision and device management utilities | Apache 2.0 |
 | scikit-learn (`sklearn`) | ≥1.3 | `GroupShuffleSplit`, `TfidfVectorizer`, `LogisticRegression`, metrics | BSD-3-Clause |
 | ConvoKit (`convokit`) | ≥2.5 | Corpus loading and utterance iteration | MIT |
@@ -89,18 +89,17 @@ All libraries were installed via `pip` and are publicly available on PyPI.
 
 ## 4. Pre-trained Model
 
-**DeBERTa-v3-base**
+**Longformer-base-4096**
 
-- **Model identifier:** `microsoft/deberta-v3-base`
-- **Source:** Hugging Face Model Hub — https://huggingface.co/microsoft/deberta-v3-base
-- **Developed by:** Microsoft Research
+- **Model identifier:** `allenai/longformer-base-4096`
+- **Source:** Hugging Face Model Hub — https://huggingface.co/allenai/longformer-base-4096
+- **Developed by:** Allen Institute for AI
 - **Paper:**
-  He, P., Gao, J., & Chen, W. (2021).
-  DeBERTaV3: Improving DeBERTa using ELECTRA-Style Pre-Training with
-  Gradient-Disentangled Embedding Sharing.
-  *arXiv preprint arXiv:2111.09543*.
-  https://arxiv.org/abs/2111.09543
-- **License:** MIT
+  Beltagy, I., Peters, M. E., & Cohan, A. (2020).
+  Longformer: The Long-Document Transformer.
+  *arXiv preprint arXiv:2004.05150*.
+  https://arxiv.org/abs/2004.05150
+- **License:** Apache 2.0
 - **Usage:** Loaded via `AutoModel.from_pretrained()` and fine-tuned end-to-end
   for binary sequence classification. The classification head (a single linear
   layer) was randomly initialised and trained jointly with the backbone.
