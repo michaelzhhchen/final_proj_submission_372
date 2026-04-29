@@ -1,3 +1,5 @@
+
+
 DESIGN DECISION: Triple Encoding vs Separate Encoding
 ======================================================
 
@@ -19,15 +21,18 @@ Solution: triple encoding
   - Position randomisation during training prevents positional bias
   - CrossEntropyLoss replaces MarginRankingLoss
 
-Inference change:
-  - Single-post scoring is no longer direct — use compare_arguments()
-    to rank two candidates head-to-head, or rank_arguments() for
-    round-robin ranking of multiple candidates
-  - This is actually more aligned with real use cases (debate prep,
-    draft comparison) where you always have two options to compare
-
-Key evaluation metric:
-  - Overall accuracy vs random (0.50) and shorter-wins (0.695)
-  - Accuracy on length-matched pairs (within 20% length ratio) is the
-    cleanest signal — shorter-wins scores 0.50 there by construction,
-    so any accuracy above 0.50 on those pairs is genuine content learning
+DESIGN DECISION: Longformer vs DebertaV3
+======================================================
+  - Originally, project was fine-tuning a DebertaV3 model
+  - Longformer was ultimately chosen over DebertaV3 due to its longer effective
+    context length (4096 tokens vs 1536)
+  - In the CMV corpus, many argument pairs require both arguments to be
+    fully represented without truncation to capture nuanced rebuttals
+    and supporting evidence
+  - DebertaV3's shorter context would force aggressive truncation of
+    longer arguments, potentially losing critical information
+  - Longformer's efficient attention mechanism (combining local windowed
+    and global attention) handles long sequences effectively while
+    maintaining computational feasibility
+  - This allows the model to learn from complete arguments rather than
+    artificially shortened versions
