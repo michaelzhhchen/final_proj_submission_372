@@ -31,8 +31,8 @@ On subsequent runs, cached splits are loaded automatically and training resumes 
 
 | Video | Link |
 |-------|------|
-| Demo Walkthrough | *[link]* |
-| Technical Walkthrough | *[link]* |
+| Demo Walkthrough | *[https://drive.google.com/file/d/1RQUQ6Pfvi3dkDfN90tMtOOK4XgZAqtfR/view?usp=sharing]* |
+| Technical Walkthrough | *[https://drive.google.com/file/d/12rvqWCV3dwlF3Vi4q5vVo0_t4vSVuRNE/view?usp=sharing]* |
 
 ---
 

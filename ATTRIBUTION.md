@@ -10,7 +10,7 @@ submission requirements.
 This project was developed with the assistance of Claude. Pseudo-code and outlines were coded by hand by the project author, and Claude was used for complete syntax, as well as extensive debugging. Claude was also used towards the end of the project for substantial clean-up of code, removing unnecessary functions from failed trials of other ideas. Consider the following an exhaustive list of components that were wholly or substantially produced or revised with AI assistance (attribution generated using Claude based on previous chatlogs of requests).
 
 **Model architecture (`LongformerTripleClassifier`)**
-- Replacement of DeBERTa-v3-base (512 token limit) with `allenai/longformer-base-4096` to encode OP + both arguments in a single forward pass without truncation.
+- Project author originally implemented a DeBERTa-v3-base model. Claude contributed a replacement of DeBERTa-v3-base (512 token limit) with `allenai/longformer-base-4096` to encode OP + both arguments in a single forward pass without truncation.
 - Implementation of `global_attention_mask` with position 0 set to 1 (CLS token global attention), required for Longformer classification tasks.
 - Mean pooling over non-padding tokens, replacing CLS token extraction.
 - Switch from separate per-argument encoding to triple encoding `[OP | ARG_A | ARG_B]` in a single sequence to eliminate length-as-feature leakage, where the model was learning to use padding length as a proxy for argument length rather than reading content.
