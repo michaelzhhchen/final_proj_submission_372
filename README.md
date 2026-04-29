@@ -17,7 +17,7 @@ pip install convokit transformers torch scikit-learn matplotlib seaborn accelera
 ```
 
 ### Running the Notebook
-Much of the project is implemented as a single Colab notebook. Open `cmv_longformer_triple.ipynb` in Google Colab and run all cells in order. A GPU runtime is required (Runtime → Change runtime type → A100 with high RAM activated). Note: because of the size of the CMV corpus, running the notebook in full took approximately an hour and a half. 
+Much of the project is implemented as a single Colab notebook. Open `cmv_longformer_training.ipynb` in Google Colab and run all cells in order. A GPU runtime is required (Runtime → Change runtime type → A100 with high RAM activated). Note: because of the size of the CMV corpus, running the notebook in full took approximately an hour and a half. 
 
 On first run, the notebook will:
 1. Download the ConvoKit winning-args-corpus automatically
