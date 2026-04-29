@@ -46,11 +46,9 @@ The API exposes one endpoint:
 
 | Method | Path | Body |
 |---|---|---|
-| POST | `/compare` | `{"arg_a": "...", "arg_b": "...", "op_text": "..."}` |
+| POST | `/evaluate` | `{"text": "<argument text>"}` |
 
-`op_text` is optional. The response includes `winner`, `confidence`, `score_a`, and `score_b`.
-
----
+The response includes `verdict`, `confidence`, `convincing_score`, and `not_convincing_score`.
 
 ---
 
