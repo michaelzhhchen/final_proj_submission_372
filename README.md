@@ -1,12 +1,11 @@
 # CMV Winning Argument Classifier
-A fine-tuned Longformer model that predicts which of two arguments successfully changed someone's view on Reddit's r/ChangeMyView. Given an original post and two competing replies, the model outputs a binary judgment of which argument is more persuasive.
+A fine-tuned Longformer model that predicts which of two arguments successfully changed someone's view on Reddit's r/ChangeMyView. Given an original post and two competing replies, the model outputs a binary judgment of which argument is more persuasive; this model is used in a web-application that can be used to compare the effectiveness of two different arguments and decide which one is more persuasive.
 
 ---
 
 ## What It Does
 
-This project fine-tunes `allenai/longformer-base-4096` on the ConvoKit winning-args-corpus to classify persuasive argument pairs from Reddit's r/ChangeMyView (CMV). Rather than encoding each argument separately and comparing scores — an approach that trivially learns to prefer shorter arguments — this model uses **triple encoding**: the original post, argument A, and argument B are packed into a single 2048-token sequence, forcing the model to read both arguments in context before making a judgment. Winner and loser positions are randomly swapped during training to prevent positional bias. The model is evaluated against three baselines (random, shorter-wins heuristic, and TF-IDF + Logistic Regression) and assessed on length-matched pairs to verify that it is learning content-based signals rather than length shortcuts.
-
+The overarching goal of this project was to create a model that could predict whether an argument was more or less persuasive to someone else. This project fine-tunes `allenai/longformer-base-4096` on the ConvoKit winning-args-corpus to classify persuasive argument pairs from Reddit's r/ChangeMyView (CMV). Rather than encoding each argument separately and comparing scores — an approach that trivially learns to prefer shorter arguments — this model uses **triple encoding**: the original post, argument A, and argument B are packed into a single 2048-token sequence, forcing the model to read both arguments in context before making a judgment. Winner and loser positions are randomly swapped during training to prevent positional bias. The model is evaluated against three baselines (random, shorter-wins heuristic, and TF-IDF + Logistic Regression) and assessed on length-matched pairs to verify that it is learning content-based signals rather than length shortcuts. This project also includes a simple web-app, which takes in two arguments to be compared, as well as an optional "original argument" to provide additional context for evaluating the argument's persuasiveness. 
 ---
 
 ## Quick Start
@@ -17,7 +16,7 @@ pip install convokit transformers torch scikit-learn matplotlib seaborn accelera
 ```
 
 ### Running the Notebook
-The project is implemented as a single Colab notebook. Open `cmv_longformer_triple.ipynb` in Google Colab and run all cells in order. A GPU runtime is required (Runtime → Change runtime type → T4 GPU).
+Much of the project is implemented as a single Colab notebook. Open `cmv_longformer_triple.ipynb` in Google Colab and run all cells in order. A GPU runtime is required (Runtime → Change runtime type → A100 with high RAM activated). Note: because of the size of the CMV corpus, running the notebook in full took approximately an hour and a half. 
 
 On first run, the notebook will:
 1. Download the ConvoKit winning-args-corpus automatically
@@ -27,17 +26,6 @@ On first run, the notebook will:
 5. Save the best checkpoint to `checkpoints/` and `export/`
 
 On subsequent runs, cached splits are loaded automatically and training resumes from scratch unless a checkpoint is manually restored.
-
-### Key Configuration
-```python
-MAX_LENGTH = 2048   # tokens per triple sequence
-BATCH_SIZE = 8
-VAL_SIZE   = 0.10
-TEST_SIZE  = 0.10
-MODEL_NAME = 'allenai/longformer-base-4096'
-```
-
----
 
 ## Video Links
 
