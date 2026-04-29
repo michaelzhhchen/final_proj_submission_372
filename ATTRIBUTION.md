@@ -32,11 +32,13 @@ This project was developed with the assistance of Claude. Pseudo-code and outlin
 - NaN fill for `op_text` after CSV cache loading, fixing `ValueError` from pandas reading empty strings as NaN.
 
 **Evaluation and baselines**
-- Identification and documentation of length confound: winners are systematically shorter than losers (mean 91 vs 161 words), with 180/364 test pairs having winners less than half the loser length. Length-matched pair accuracy added as primary honest metric.
 - Length heuristic baselines (shorter-wins, longer-wins) added alongside TF-IDF + LR to contextualise model performance.
 
 **Hyperparameter search (Section 5)**
 - Fresh model instantiated per LR candidate to prevent weight state bleeding across runs.
+
+**Final Things**
+
 
 The web-app framework was generated using Claude, and the project author. The project author exported the model to longform.py and then imported it into the web-app. 
 
