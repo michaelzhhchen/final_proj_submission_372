@@ -22,13 +22,15 @@ pip install -r requirements.txt
 
 The fine-tuned Longformer weights are **not** committed to the repo (file is too large for git).
 
+Instead, visit https://drive.google.com/file/d/1m8bEOQxLDIqstEghb1YkGB_U84-8av-g/view?usp=sharing and download the weights file here. 
+
 Place the weights file at:
 
 ```
 models/longformer_triple_best.pt
 ```
 
-If you need to retrain from scratch, run the training notebook (see below).
+If you need to retrain from scratch, run the training notebook (see below) and move the weights to the same file location described above.
 
 ---
 
