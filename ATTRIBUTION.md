@@ -39,7 +39,6 @@ This project was developed with the assistance of Claude. Pseudo-code and outlin
 
 **Final Things**
 
-
 The web-app framework was generated using Claude, and the project author. The project author exported the model to longform.py and then imported it into the web-app. 
 
 All AI-assisted code was reviewed, tested against training logs, and accepted or modified by the project author before inclusion.
