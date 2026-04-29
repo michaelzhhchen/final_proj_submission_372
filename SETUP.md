@@ -56,7 +56,7 @@ The API exposes one endpoint:
 ## Running the Notebook
 
 ```bash
-jupyter notebook "notebooks/cmv_longformer_triple (1).ipynb"
+jupyter notebook "notebooks/cmv_longformer_training.ipynb"
 ```
 
 The notebook will download the ConvoKit `winning-args-corpus` (~500 MB) on first run and cache it locally. Subsequent runs skip the download.
