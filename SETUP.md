@@ -59,28 +59,3 @@ jupyter notebook "notebooks/cmv_longformer_triple (1).ipynb"
 ```
 
 The notebook will download the ConvoKit `winning-args-corpus` (~500 MB) on first run and cache it locally. Subsequent runs skip the download.
-
----
-
-## Project Structure
-
-```
-data/
-  longformer_triple_best.pt   # fine-tuned weights (not in git)
-docs/
-  triple_encoding_design.md   # design decision notes
-models/
-  longform.py                 # LongformerTripleClassifier class + build_model()
-notebooks/
-  cmv_longformer_triple.ipynb # training + evaluation
-src/
-  argument_evaluator.py       # FastAPI app
-  static/
-    index.html                # frontend UI
-```
-
----
-
-## Design Notes
-
-See [docs/triple_encoding_design.md](docs/triple_encoding_design.md) for an explanation of why triple encoding (packing both arguments into one sequence) was chosen over separate encoding, and what evaluation metrics are meaningful for this task.
