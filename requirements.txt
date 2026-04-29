@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+torch
+transformers
+convokit
+scikit-learn
+matplotlib
+seaborn
+numpy
+pandas
